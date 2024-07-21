@@ -1,4 +1,5 @@
 require 'csv'
+require './src/log_parser'
 
 =begin
 入力の制約
@@ -23,7 +24,7 @@ if __FILE__ == $0
 
   begin
     CSV.foreach(input_path) do |row|
-      data << row
+      logs << row[0]
     end
   rescue Errno::ENOENT
     puts "ファイルが存在しません： #{input_path}"
@@ -31,8 +32,8 @@ if __FILE__ == $0
 
   data_size = logs.size
   (0..data_size - 2).each do |idx|
-    from = Parser.new(logs[idx])
-    to = Parser.new(logs[idx + 1])
+    from = LogParser.new(logs[idx]).parse
+    to = LogParser.new(logs[idx + 1]).parse
     total_fare += Calculator.new(from, to).calculate
   end
 
