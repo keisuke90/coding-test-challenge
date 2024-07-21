@@ -15,7 +15,6 @@ LOG_REGEXP = /^(\d{2}):(\d{2}):(\d{2}\.\d{3})\s+(\d{1,2}\.\d)$/
 logs = []
 total_fare = 0
 
-# 入力を受け取る
 if __FILE__ == $0
   input_path = ARGV[0]
 
